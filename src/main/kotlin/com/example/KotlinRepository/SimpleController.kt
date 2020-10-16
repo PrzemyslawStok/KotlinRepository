@@ -15,11 +15,15 @@ class SimpleController(val studentRepository: StudentRepository) {
 
     @RequestMapping("add")
     fun add(name: String?, surname: String?):String{
-
         if(name!=null&&surname!=null) {
             studentRepository.save(Student(name, surname))
             return "Dodano studenta: ${name} ${surname}"
         }else
             return "Proszę wprowadzić imię i nazwisko studenta"
+    }
+
+    @RequestMapping("Students")
+    fun allStudents():Iterable<Student>{
+        return studentRepository.findAll()
     }
 }
