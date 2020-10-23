@@ -18,7 +18,7 @@ class SimpleController(val studentRepository: StudentRepository) {
     fun getIndex() = "index"
 
     @RequestMapping("add")
-    fun add(name: String?, surname: String?):String{
+    fun add(@RequestParam name: String?,@RequestParam surname: String?):String{
         if(name!=null&&surname!=null) {
             studentRepository.save(Student(name, surname))
             logger.info("Dodano studenta ${name} ${surname}")
@@ -30,8 +30,14 @@ class SimpleController(val studentRepository: StudentRepository) {
     }
 
     @RequestMapping("Student")
-    fun findStudent(@RequestParam("name") name: String):List<Student>{
-        return studentRepository.findByName(name)
+    fun findStudent(@RequestParam("name") name: String?):List<Student>?{
+        if(name!=null) {
+            logger.info("Wyszukano studentów o imieniu: $name")
+            return studentRepository.findByName(name)
+        }else {
+            logger.warn("Błędne dane podczas wyszukiwania studenta")
+            return null
+        }
     }
 
     @RequestMapping("Students")
