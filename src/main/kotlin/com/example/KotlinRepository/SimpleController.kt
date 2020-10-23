@@ -1,11 +1,15 @@
 package com.example.KotlinRepository
 
+import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class SimpleController(val studentRepository: StudentRepository) {
+
+    val logger = LoggerFactory.getLogger(SimpleController::class.simpleName)
+
     @RequestMapping("")
     fun getInfo():String{
         return "info"
@@ -17,9 +21,12 @@ class SimpleController(val studentRepository: StudentRepository) {
     fun add(name: String?, surname: String?):String{
         if(name!=null&&surname!=null) {
             studentRepository.save(Student(name, surname))
+            logger.info("Dodano studenta ${name} ${surname}")
             return "Dodano studenta: ${name} ${surname}"
-        }else
+        }else {
+            logger.warn("Wprowadzono błędne dane podczas dodawania studenta")
             return "Proszę wprowadzić imię i nazwisko studenta"
+        }
     }
 
     @RequestMapping("Students")
