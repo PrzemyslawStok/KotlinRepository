@@ -13,8 +13,9 @@ class KotlinRepositoryApplication {
 	@Bean
 	fun init(repository: StudentRepository) = CommandLineRunner {
 		for (i in 1..10) {
-			logger.info("Student $i added")
+			logger.info("Students $i added")
 			repository.save(Student("Przemysław", "Stokłosa_${i}"))
+			repository.save(Student("Piotr", "Stokłosa_${i}"))
 		}
 	}
 }
