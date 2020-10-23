@@ -6,12 +6,13 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
-class KotlinRepositoryApplication
+class KotlinRepositoryApplication {
 
-@Bean
-fun init(repository: StudentRepository) = CommandLineRunner{
-	for(i in 1..10)
-		repository.save(Student("Przemysław","Stokłosa_${i}"))
+	@Bean
+	fun init(repository: StudentRepository) = CommandLineRunner {
+		for (i in 1..10)
+			repository.save(Student("Przemysław", "Stokłosa_${i}"))
+	}
 }
 
 fun main(args: Array<String>) {

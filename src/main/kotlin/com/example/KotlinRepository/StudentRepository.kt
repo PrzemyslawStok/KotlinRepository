@@ -4,4 +4,5 @@ import org.springframework.data.repository.CrudRepository
 
 interface StudentRepository : CrudRepository<Student,Long>{
     fun findByName(name: String):List<Student>
+    fun findBySurname(surname: String):List<Student>
 }
