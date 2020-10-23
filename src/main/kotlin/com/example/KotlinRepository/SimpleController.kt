@@ -29,6 +29,11 @@ class SimpleController(val studentRepository: StudentRepository) {
         }
     }
 
+    @RequestMapping("Student")
+    fun findStudent(@RequestParam("name") name: String):List<Student>{
+        return studentRepository.findByName(name)
+    }
+
     @RequestMapping("Students")
     fun allStudents():Iterable<Student>{
         val students = studentRepository.findAll()
