@@ -14,13 +14,15 @@ data class Student(
         @Id @GeneratedValue(strategy = GenerationType.AUTO)
         val id:Long = 0
 
-        fun createStudents(n:Int,name:String,surname:String,f:(Int)->String):ArrayList<Student>{
-                val array:ArrayList<Student> = arrayListOf()
+        companion object {
+                fun createStudents(n: Int, name: String, surname: String, f: (Int) -> String): ArrayList<Student> {
+                        val array: ArrayList<Student> = arrayListOf()
 
-                for(i in 1..n){
-                        array.add(Student("${name}_${f(n)}","${surname}_${f(n)}"))
+                        for (i in 1..n) {
+                                array.add(Student("${name}_${f(n)}", "${surname}_${f(n)}"))
+                        }
+
+                        return array
                 }
-
-                return array
         }
 }
