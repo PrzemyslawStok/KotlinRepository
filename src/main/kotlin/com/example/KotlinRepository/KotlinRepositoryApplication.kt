@@ -19,8 +19,10 @@ class KotlinRepositoryApplication {
 
 		val arrayOfStudents = Student.createStudents(10,"Piotr","Stokłosa"){"_$it"}
 
-		repository.saveAll(Student.createStudents(10,"Piotr","Stokłosa"){"_$it"})
-		repository.saveAll(Student.createStudents(10,"Piotr","Stokłosa"){"${it*it}"})
+		repository.saveAll(Student.createStudents(10,"Piotr","Stokłosa"){
+			logger.info("Student $it dodany")
+			"_$it"
+		})
 	}
 }
 
