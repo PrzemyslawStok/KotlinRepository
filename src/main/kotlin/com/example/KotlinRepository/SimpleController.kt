@@ -29,8 +29,8 @@ class SimpleController(val studentRepository: StudentRepository) {
         }
     }
 
-    @RequestMapping("Student")
-    fun findStudent(@RequestParam("name") name: String?):List<Student>?{
+    @RequestMapping("name")
+    fun findStudentByName(@RequestParam("name") name: String?):List<Student>?{
         if(name!=null) {
             logger.info("Wyszukano studentów o imieniu: $name")
             return studentRepository.findByName(name)
@@ -39,6 +39,8 @@ class SimpleController(val studentRepository: StudentRepository) {
             return null
         }
     }
+
+
 
     @RequestMapping("Students")
     fun allStudents():Iterable<Student>{
