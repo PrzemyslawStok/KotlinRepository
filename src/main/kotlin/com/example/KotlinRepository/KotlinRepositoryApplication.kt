@@ -17,6 +17,7 @@ class KotlinRepositoryApplication {
 			repository.save(Student("Przemysław", "Stokłosa_${i}"))
 		}
 		repository.saveAll(Student.createStudents(10,"Piotr","Stokłosa"){"_{it}"})
+		repository.saveAll(Student.createStudents(10,"Piotr","Stokłosa"){"${it*it}"})
 	}
 }
 

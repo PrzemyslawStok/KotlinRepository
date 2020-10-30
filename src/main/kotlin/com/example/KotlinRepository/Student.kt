@@ -19,7 +19,7 @@ data class Student(
                         val array: ArrayList<Student> = arrayListOf()
 
                         for (i in 1..n) {
-                                array.add(Student("${name}_${f(n)}", "${surname}_${f(n)}"))
+                                array.add(Student("${name}_${f(i)}", "${surname}_${f(i)}"))
                         }
 
                         return array
