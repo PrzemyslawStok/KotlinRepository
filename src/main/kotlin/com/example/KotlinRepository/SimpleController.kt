@@ -29,11 +29,22 @@ class SimpleController(val studentRepository: StudentRepository) {
         }
     }
 
-    @RequestMapping("name")
+    @RequestMapping("Student/name")
     fun findStudentByName(@RequestParam("name") name: String?):List<Student>?{
         if(name!=null) {
             logger.info("Wyszukano studentów o imieniu: $name")
             return studentRepository.findByName(name)
+        }else {
+            logger.warn("Błędne dane podczas wyszukiwania studenta")
+            return null
+        }
+    }
+
+    @RequestMapping("Student/surname")
+    fun findStudentBySurname(@RequestParam("surname") surname: String?):List<Student>?{
+        if(surname!=null) {
+            logger.info("Wyszukano studentów o imieniu: $surname")
+            return studentRepository.findBySurname(surname)
         }else {
             logger.warn("Błędne dane podczas wyszukiwania studenta")
             return null
