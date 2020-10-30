@@ -19,8 +19,15 @@ class KotlinRepositoryApplication {
 
 		val arrayOfStudents = Student.createStudents(10,"Piotr","Stokłosa"){"_$it"}
 
+		arrayOfStudents.forEach{
+			repository.save(it)
+			logger.info("Student dodany")
+		}
+
+		arrayOfStudents.forEachIndexed({index, student ->  })
+
 		repository.saveAll(Student.createStudents(10,"Piotr","Stokłosa"){
-			logger.info("Student $it dodany")
+			//logger.info("Student $it dodany")
 			"_$it"
 		})
 	}
