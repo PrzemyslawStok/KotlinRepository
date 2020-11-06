@@ -1,23 +1,29 @@
 package com.example.KotlinRepository
 
 import org.slf4j.LoggerFactory
+import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
-@RestController
+@Controller
 class SimpleController(val studentRepository: StudentRepository) {
 
     val logger = LoggerFactory.getLogger(SimpleController::class.simpleName)
 
     @RequestMapping("")
+    @ResponseBody
     fun getInfo():String{
         return "info"
     }
     @RequestMapping("index")
+    @ResponseBody
     fun getIndex() = "index"
 
     @RequestMapping("add")
+    @ResponseBody
     fun add(@RequestParam name: String?,@RequestParam surname: String?):String{
         if(name!=null&&surname!=null) {
             studentRepository.save(Student(name, surname))
@@ -30,6 +36,7 @@ class SimpleController(val studentRepository: StudentRepository) {
     }
 
     @RequestMapping("Student/name")
+    @ResponseBody
     fun findStudentByName(@RequestParam("name") name: String?):List<Student>?{
         if(name!=null) {
             logger.info("Wyszukano studentów o imieniu: $name")
@@ -41,6 +48,7 @@ class SimpleController(val studentRepository: StudentRepository) {
     }
 
     @RequestMapping("Student/surname")
+    @ResponseBody
     fun findStudentBySurname(@RequestParam("surname") surname: String?):List<Student>?{
         if(surname!=null) {
             logger.info("Wyszukano studentów o imieniu: $surname")
@@ -54,8 +62,9 @@ class SimpleController(val studentRepository: StudentRepository) {
 
 
     @RequestMapping("Students")
-    fun allStudents():Iterable<Student>{
+    fun allStudents(model: Model):String{
         val students = studentRepository.findAll()
-        return studentRepository.findAll()
+        model.addAttribute("students",students)
+        return "index"
     }
 }

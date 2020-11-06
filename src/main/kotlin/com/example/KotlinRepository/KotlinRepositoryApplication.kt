@@ -13,7 +13,7 @@ class KotlinRepositoryApplication {
 	@Bean
 	fun init(repository: StudentRepository) = CommandLineRunner {
 		for (i in 1..10) {
-			logger.info("Student $i added")
+			logger.info("Student $i dodany")
 			repository.save(Student("Przemysław", "Stokłosa_${i}"))
 		}
 
@@ -21,10 +21,9 @@ class KotlinRepositoryApplication {
 
 		arrayOfStudents.forEach{
 			repository.save(it)
-			logger.info("Student dodany")
 		}
 
-		arrayOfStudents.forEachIndexed({index, student ->  })
+		arrayOfStudents.forEachIndexed{ index, student -> logger.info("Student ${index} dodany") }
 
 		repository.saveAll(Student.createStudents(10,"Piotr","Stokłosa"){
 			//logger.info("Student $it dodany")
